@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getCompanyInfo, getAllLaunches } from "../../service";
-import Select from './Select';
 import Launches from './Launches'
 
 const LaunchApp = () => {

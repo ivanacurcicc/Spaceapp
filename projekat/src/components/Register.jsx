@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { getAllUsers, postUser } from "../service"
+import { StyledLogin, StyledLoginBtn } from './styledComponents' 
 
 const Register = () => {
     const [username, setUsername] = useState('')
@@ -14,73 +15,67 @@ const Register = () => {
         getAllUsers().then(res => setUsers(res.data))
     }, [])
 
-    let regExLetters = /[a-zA-Z]/
-    let regExNumbers = /[0-9]/
     let regExEmail = /\S+@\S+\.\S+/
 
     const isValid = () => username.length >= 4
         &&
-        password.length >= 8
+        password.length >= 6
         &&
         regExEmail.test(email)
-        &&
-        regExNumbers.test(password)
-        &&
-        regExLetters.test(password)
 
     const displayError = () => {
-        if (username.length < 4) { setError('Username must include 8 characters or more') }
+        if (username.length < 4) { setError('Username must include 4 characters or more') }
         if (users.map(user => user.username).includes(username)) { setError('Username is already in use') }
         if (!regExEmail.test(email)) { setError('Email is invalid') }
         if (users.map(user => user.email).includes(email)) { setError('Email is already in use') }
-        if (password.length < 8) { setError('Password must include 8 characters or more') }
-        if (!regExLetters.test(password)) { setError('Password must contain at least one letter') }
-        if (!regExNumbers.test(password)) { setError('Password must contain a least one number') }
+        if (password.length < 6) { setError('Password must include 6 characters or more') }
     }
-
     return (
         <>
-            <div>
-                <h2>Register</h2>
+            <StyledLogin>
                 <div>
-                    <label>Enter your username: </label>
-                    <input value={username} type='text' onChange={(e) => setUsername(e.target.value)} />
-                    <p className="error">{error}</p>
-                </div>
-                <div>
-                    <label>Set your password: </label>
-                    <input value={password} type='password' onChange={(e) => setPassword(e.target.value)} />
-                    <p className="error">{error}</p>
-                </div>
-                <div>
-                    <label>Enter your email: </label>
-                    <input value={email} type='text' onChange={(e) => setEmail(e.target.value)} />
-                    <p className="error">{error}</p>
-                </div>
+                    <h2>Register</h2>
+                    <div>
+                        <label>Enter your username: </label>
+                        <input value={username} type='text' placeholder="Enter your username here" onChange={(e) => setUsername(e.target.value)} />
+                        <p className="error">{error}</p>
+                    </div>
+                    <div>
+                        <label>Set your password: </label>
+                        <input value={password} type='password' placeholder="Enter your password here" onChange={(e) => setPassword(e.target.value)} />
+                        <p className="error">{error}</p>
+                    </div>
+                    <div>
+                        <label>Enter your email: </label>
+                        <input value={email} type='text' placeholder="Enter your email here" onChange={(e) => setEmail(e.target.value)} />
+                        <p className="error">{error}</p>
+                    </div>
 
 
-                <button onClick={(e) => {
-                    e.preventDefault()
-                    if (!isValid()) {
-                        displayError()
-                        return
-                    }
-                    getAllUsers().then(res => {
-                        if (!res.data.some(user => user.username === username || user.email === email)) {
-                            postUser(username, email, password).then(res => {
-                                history.push('/login')
-                            })
-                        }
-                        else {
+                    <StyledLoginBtn onClick={(e) => {
+                        e.preventDefault()
+                        if (!isValid()) {
                             displayError()
-                            setUsername('')
-                            setEmail('')
-                            setPassword('')
+                            return
                         }
-                    })
+                        getAllUsers().then(res => {
+                            if (!res.data.some(user => user.username === username || user.email === email)) {
+                                postUser(username, email, password).then(res => {
+                                    history.push('/login')
+                                })
+                            }
+                            else {
+                                displayError()
+                                setUsername('')
+                                setEmail('')
+                                setPassword('')
+                                setError('')
+                            }
+                        })
 
-                }}>Submit</button>
-            </div>
+                    }} value="Submit" />
+                </div>
+            </StyledLogin>
         </>
     )
 }

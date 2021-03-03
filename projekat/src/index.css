@@ -1,0 +1,8 @@
+*{
+  
+    box-sizing: border-box;
+}
+body{
+    background-image:linear-gradient(rgba(13, 22, 12, 0.7),rgba(22, 32, 19, 0.7)), url(img/wp3491779-cool-map-wallpaper.jpg);
+   
+}

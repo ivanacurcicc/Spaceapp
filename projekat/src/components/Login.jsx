@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useHistory } from "react-router"
 import { getAllUsers } from "../service"
+import { StyledLogin,StyledLoginBtn } from './styledComponents'
 
 const Login = ({ setUser }) => {
     const [username, setUsername] = useState('')
@@ -10,7 +11,6 @@ const Login = ({ setUser }) => {
     const history = useHistory()
 
     const loginUser = async () => {
-        console.log("usao");
         getAllUsers().then(res => {
             debugger;
             let user = res.data.find(el => (el.username === username || el.email === username) && el.password === password)
@@ -27,14 +27,19 @@ const Login = ({ setUser }) => {
 
     return (
         <>
-            <form onSubmit={loginUser}>
-                <label>Username:</label>
-                <input type="text" placeholder="username" onChange={e => setUsername(e.target.value)} />
-                <label>Password: </label>
-                <input type="text" placeholder="password" onChange={e => setPassword(e.target.value)} />
-                <input type="submit" value="LoginTest" />
-            </form>
-            <p className="error">{error}</p>
+            <StyledLogin>
+                <form onSubmit={loginUser}>
+                    <div>
+                    <h2>Login</h2>
+                    <label>Username:</label>
+                    <input type="text" placeholder="Enter your username" onChange={e => setUsername(e.target.value)} />
+                    </div>
+                    <label>Password: </label>
+                    <input type="text" placeholder="Enter your password" onChange={e => setPassword(e.target.value)} />
+                    <StyledLoginBtn type="submit" value="Login" />
+                </form>
+                <p className="error">{error}</p>
+            </StyledLogin>
         </>
     )
 }

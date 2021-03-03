@@ -1,9 +1,14 @@
+import { StyledDivCont, StyledDivItem } from '../styledComponents'
 import Launch from './Launch'
 
-const Launches = ({launches}) => {
+const Launches = ({ launches }) => {
     return (
         <>
-            {launches.map(launch => <Launch key={launch.id} launch={launch} />)}
+            <StyledDivCont>
+                <StyledDivItem>
+                    {launches.map(launch => <Launch key={launch.id} launch={launch} />)}
+                </StyledDivItem>
+            </StyledDivCont>
         </>
     )
 }

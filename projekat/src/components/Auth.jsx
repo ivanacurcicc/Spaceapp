@@ -1,11 +1,20 @@
 import { Link } from 'react-router-dom'
+import { StyledLink } from "./styledComponents"
+
 const Auth = () => {
     return (
 
         <>
-            <Link style={{ padding: 5 }} to="/login">Login</Link>
-            <Link style={{ padding: 5 }} to="/register">Register</Link>
-
+            <div>
+                <StyledLink style={{ padding: 5 }} to="/login">Login</StyledLink>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div>
+                <StyledLink style={{ padding: 5 }} to="/register">Register</StyledLink>
+            </div>
         </>
     )
 }

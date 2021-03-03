@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 const App = () => {
     const [user, setUser] = useState(null)
-    const [users, setUsers] = useState([])
     const [error, setError] = useState('')
 
     return (
@@ -23,10 +22,10 @@ const App = () => {
                     <Home user={user} />
                 </Route>
                 <Route exact path="/login">
-                    <Login setUser={setUser} setUsers={setUsers} error={error} setError={setError} />
+                    <Login setUser={setUser} error={error} setError={setError} />
                 </Route>
                 <Route exact path="/register">
-                    <Register user={user} setUsers={setUsers} error={error} setError={setError} />
+                    <Register user={user} setUser={setUser} error={error} setError={setError} />
                 </Route>
                 <Route exact path="/launches">
                     <LaunchApp></LaunchApp>
