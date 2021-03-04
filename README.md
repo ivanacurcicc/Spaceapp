@@ -14,7 +14,7 @@ npm install styled-components
 npm start
 ```
 3. Run the site
-- Open [http://localhost:3000] (http://localhost:3000) to view it in the browser.
+- Open (http://localhost:3000) to view it in the browser.
 
 ## Functionalities
 - Ability to register and login as a user
